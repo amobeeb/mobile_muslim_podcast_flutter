@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:muslim_podcast/screen/components/bottom_navigation.dart';
+import 'package:muslim_podcast/screen/components/page_title.dart';
 import 'package:muslim_podcast/utils/app_colors.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
-  static const String routeName = '/home';
+class DuaMain extends StatelessWidget {
+  const DuaMain({Key key}) : super(key: key);
+  static const String routeName = '/dua_main';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,16 +21,13 @@ class Home extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GreetingsAndSolatAlert(),
+                   PageTitle('Scholars Podcast'),
                     Container(child: Icon(FontAwesomeIcons.cog),
                     padding: EdgeInsets.only(bottom:15.0),
                     )
                   ],
                 ),
-                SizedBox(height: 25.0,),
-                // second column 
-                DailyQuote(),
-
+                SizedBox(height: 25.0,), 
                 // third column Menu
                 MenuGridView()
 
@@ -107,18 +105,18 @@ class MenuGridView extends StatelessWidget {
                 // column one 
                 Column(
                 children: [
-                  buildMenuContainer(context, 'Scholars Podcast', '/scholars', FontAwesomeIcons.userCircle, kSize, 0.43, 0.25),
+                  buildMenuContainer(context, 'Daily Dua', '/daily_dua', kSize, 0.43, 0.25),
                   SizedBox(height: 5.0,),
-                   buildMenuContainer(context, 'Quran Recitation', '/scholars', FontAwesomeIcons.user, kSize, 0.43, 0.3),
+                   buildMenuContainer(context, 'Morning Adhikr', '/daily_dua', kSize, 0.43, 0.3),
                 ],
               ),
               SizedBox(width:10.0),
               // column two 
                Column(
                 children: [
-                 buildMenuContainer(context, 'Hadith', '/dua_main', FontAwesomeIcons.bookOpen, kSize, 0.43, 0.3),
+                 buildMenuContainer(context, 'Evening Adhikr', '/daily_dua', kSize, 0.43, 0.3),
                   SizedBox(height: 5.0,),
-                   buildMenuContainer(context, 'Dua', '/dua_main', FontAwesomeIcons.star,  kSize, 0.43, 0.25),
+                   buildMenuContainer(context,'Robana', '/daily_dua', kSize, 0.43, 0.25),
                 ],
               )
               
@@ -127,7 +125,7 @@ class MenuGridView extends StatelessWidget {
     );
   }
 
-  Widget buildMenuContainer(context, String title, String routeName, IconData icon, Size kSize, double width, double height) {
+  Widget buildMenuContainer(context, String title, String routeName, Size kSize, double width, double height) {
     return InkWell(
       onTap: (){
         Navigator.pushNamed(context, routeName);
@@ -147,10 +145,8 @@ class MenuGridView extends StatelessWidget {
                           Container(
                             width: kSize.width * 0.3,
                             child: Text('$title', style: Theme.of(context).textTheme.headline2.copyWith(fontWeight: FontWeight.w500),)),
-                            SizedBox(height: kSize.height * 0.1,),
-                            Align(
-                              alignment:Alignment.bottomRight, 
-                            child: Icon(icon))
+                          
+                            
                         ],
                       ),
                   ),
