@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigation()
+      bottomNavigationBar: BottomNavigation(currentIndex: 0, routeName: '/home')
     );
   }
 }
@@ -107,18 +107,18 @@ class MenuGridView extends StatelessWidget {
                 // column one 
                 Column(
                 children: [
-                  buildMenuContainer(context, 'Scholars Podcast', '/scholars', FontAwesomeIcons.userCircle, kSize, 0.43, 0.25),
+                  buildMenuContainer(context, 'Scholars Podcast', '/scholars', FontAwesomeIcons.userCircle, kSize, 0.43, 0.25,"assets/images/scholars_podcast_img.jpg"),
                   SizedBox(height: 5.0,),
-                   buildMenuContainer(context, 'Quran Recitation', '/scholars', FontAwesomeIcons.user, kSize, 0.43, 0.3),
+                   buildMenuContainer(context, 'Quran Recitation', '/scholars', FontAwesomeIcons.user, kSize, 0.43, 0.3,"assets/images/quran_recitation.jpg"),
                 ],
               ),
               SizedBox(width:10.0),
               // column two 
                Column(
                 children: [
-                 buildMenuContainer(context, 'Hadith', '/dua_main', FontAwesomeIcons.bookOpen, kSize, 0.43, 0.3),
+                 buildMenuContainer(context, 'Hadith', '/dua_main', FontAwesomeIcons.bookOpen, kSize, 0.43, 0.3,"assets/images/hadith.jpg"),
                   SizedBox(height: 5.0,),
-                   buildMenuContainer(context, 'Dua', '/dua_main', FontAwesomeIcons.star,  kSize, 0.43, 0.25),
+                   buildMenuContainer(context, 'Dua', '/dua_main', FontAwesomeIcons.star,  kSize, 0.43, 0.25, "assets/images/dua.jpg"),
                 ],
               )
               
@@ -127,7 +127,7 @@ class MenuGridView extends StatelessWidget {
     );
   }
 
-  Widget buildMenuContainer(context, String title, String routeName, IconData icon, Size kSize, double width, double height) {
+  Widget buildMenuContainer(context, String title, String routeName, IconData icon, Size kSize, double width, double height,  String backgroundImage) {
     return InkWell(
       onTap: (){
         Navigator.pushNamed(context, routeName);
@@ -138,8 +138,12 @@ class MenuGridView extends StatelessWidget {
                      height: kSize.height * height,
                       width: kSize.width * width,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        // color: Colors.red,
                          borderRadius: BorderRadius.circular(20.0),
+                         image: DecorationImage(
+                           image: AssetImage(backgroundImage),
+                           fit: BoxFit.cover
+                         )
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

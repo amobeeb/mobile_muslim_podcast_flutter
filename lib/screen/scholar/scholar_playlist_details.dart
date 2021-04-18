@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:muslim_podcast/screen/components/bottom_navigation.dart';
 import 'package:muslim_podcast/utils/app_colors.dart';
 
-class ScholarPlaylist extends StatelessWidget {
-  const ScholarPlaylist({Key key}) : super(key: key);
-  static const  String routeName = '/scholar_playlist';
+class ScholarPlaylistDetails extends StatelessWidget {
+  const ScholarPlaylistDetails({Key key}) : super(key: key);
+static const  String routeName = '/scholar_playlist_details';
   @override
   Widget build(BuildContext context) {
     Size kSize = MediaQuery.of(context).size;
@@ -25,7 +25,7 @@ class ScholarPlaylist extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-             height: 60,
+             height: kSize.height * 0.8,
              decoration: BoxDecoration(
                color: Colors.white,
                borderRadius: BorderRadius.only(
@@ -33,45 +33,37 @@ class ScholarPlaylist extends StatelessWidget {
                  topRight: Radius.circular(30.0)
                )
              ),
-             child: Padding(
-               padding: const EdgeInsets.symmetric(vertical:5.0),
+             child: Container(
+              
+               padding: const EdgeInsets.symmetric(vertical:5.0, horizontal: 20.0),
                child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   Text('Sheik Farouk Onikijipa', maxLines: 1, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline2.copyWith(fontWeight:FontWeight.w500),),
-                   Text('20 Playlists', textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1,),
+                   Text('Sheik Farouk Onikijipa', maxLines: 1, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight:FontWeight.w300),),
+                   Text('Iwo Omokewu Alfa', maxLines: 1, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline1.copyWith(fontWeight:FontWeight.w500),),
+                   Text('New April, 2021', textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1,),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text('Episode Shownotes', style: Theme.of(context).textTheme.bodyText1),
+                          Text('lorem ipsum ireseum lorem ipsum ireseum lorem ipsum ireseum lorem ipsum ireseum lorem ipsum ireseum lorem ipsum ireseum lorem ipsum ireseum lorem ipsum ireseum ', style: Theme.of(context).textTheme.bodyText2)
+                        ],
+                      ),
+                    )
                  ],
                ),
              ),
             ),
           ),
-          SliverList( 
-            delegate: SliverChildBuilderDelegate (
-              (BuildContext context, int index) {
-                   var playlistNumber = index + 1;
-                   var playlistNoToString =  playlistNumber.toString();
-                    
-                    
-              return InkWell(
-                onTap: (){
-                  Navigator.pushNamed(context, '/scholar_playlist_details');
-                },
-                              child: ListTile(
-                  tileColor: Colors.white,
-                  leading: Text('${playlistNoToString.length == 1?'0'+playlistNoToString:playlistNoToString}', style: Theme.of(context).textTheme.headline3.copyWith(fontWeight:FontWeight.w100),),
-                  title: Text('Hello WOrld', style: Theme.of(context).textTheme.headline3.copyWith(fontWeight:FontWeight.w400),),
-                  trailing: Icon(FontAwesomeIcons.ellipsisH, color: Color(AppColor.kBlack),size: 15,),
-                ),
-              );
-            },
-            childCount: 20,
-          ))
+          
         ],
       ),
-      bottomNavigationBar: BottomNavigation()
+      bottomNavigationBar: BottomNavigation(currentIndex:1)
     );
   }
 }
- 
+
+
 
  class ScholarsIcons extends StatelessWidget {
    const ScholarsIcons({Key key}) : super(key: key);

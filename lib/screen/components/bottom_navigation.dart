@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:muslim_podcast/utils/app_colors.dart';
 
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({Key key}) : super(key: key);
+class BottomNavigation extends StatefulWidget {
+  final currentIndex;
+  final routeName;
+  const BottomNavigation({Key key, this.currentIndex, this.routeName}) : super(key: key);
 
   @override
+  _BottomNavigationState createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  @override
   Widget build(BuildContext context) {
+    var _selectedIndex = 0;
     return BottomNavigationBar(
         backgroundColor: Color(AppColor.kWhite),
          items: [
@@ -17,26 +25,45 @@ class BottomNavigation extends StatelessWidget {
            ),
            BottomNavigationBarItem(
              icon: Icon(FontAwesomeIcons.users),
-             label: 'User'
+             label: 'Scholars' 
              
            ),
             BottomNavigationBarItem(
              icon: Icon(FontAwesomeIcons.user),
-             label: 'User'
+             label: 'Hadith'
            ),
            BottomNavigationBarItem(
              icon: Icon(FontAwesomeIcons.book),
-             label: 'Book'
+             label: 'Quran'
            ),
            BottomNavigationBarItem(
              icon: Icon(FontAwesomeIcons.star),
-             label: 'Star'
+             label: 'Dua'
            )
          ],
          
-         currentIndex: 0,
+         currentIndex: _selectedIndex,
          selectedItemColor: Colors.black,
          unselectedItemColor: Colors.black,
+         onTap: (int index){
+          
+           setState(() {
+             _selectedIndex = index;
+           });
+            debugPrint(_selectedIndex.toString());
+           switch(index){
+             case 0:
+              Navigator.pushNamed(context, '/home');
+              break;
+               case 1:
+              Navigator.pushNamed(context, '/scholars');
+              break;
+              default:
+              Navigator.pushNamed(context, widget.routeName);
+              break;
+           }
+          
+         },
       );
   }
 }

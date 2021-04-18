@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_podcast/screen/home.dart';
-import 'package:muslim_podcast/screen/scholars.dart';
+import 'package:muslim_podcast/screen/scholar/scholars.dart';
 import 'package:muslim_podcast/utils/app_colors.dart';
 import 'package:muslim_podcast/utils/generate_route.dart';
 

@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class AppColor{
   static int kPrimaryColor = 0xFF020202;
   static int kSecondaryColor = 0xFF34312B;
@@ -5,3 +7,4 @@ class AppColor{
   static int kBlack = 0xFF000000;
   
 }
+

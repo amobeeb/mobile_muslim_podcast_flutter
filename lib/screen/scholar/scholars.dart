@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:muslim_podcast/repo/scholars_repo.dart';
+import 'package:muslim_podcast/screen/components/bottom_navigation.dart';
 import 'package:muslim_podcast/screen/components/page_title.dart';
 import 'package:muslim_podcast/utils/app_colors.dart';
 
@@ -9,6 +11,7 @@ class Scholars extends StatelessWidget {
   static const String routeName = '/scholars';
   @override
   Widget build(BuildContext context) {
+    Size kSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -32,28 +35,32 @@ class Scholars extends StatelessWidget {
                 ),
                 // second column
                 Container(
-                  width: 350,
-                  height: 700,
+                  width: kSize.width,
+                  height: kSize.height * 0.7,
                   child: StaggeredGridView.countBuilder(
                     crossAxisCount: 4,
-                    itemCount: 20,
+                    itemCount: scholars.length,
                     itemBuilder: (BuildContext context, int index) =>
                         InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, '/scholar_playlist');
+                            Navigator.pushNamed(context, '/scholar_playlist', arguments: scholars[index]);
                           },
                                                   child: new Container( 
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
-                                 color: Colors.green,
+                                 image: DecorationImage(
+                                   image: NetworkImage(scholars[index].picture),
+                                   fit: BoxFit.cover
+                                 )
                               ),
                              
-                              child: new Center(
-                                child: new CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  child: new Text('$index'),
-                                ),
-                              )),
+                              // child: new Center(
+                              //   child: new CircleAvatar(
+                              //     backgroundColor: Colors.white,
+                              //     child: new Text('$index'),
+                              //   ),
+                              // )
+                              ),
                         ),
                     staggeredTileBuilder: (int index) =>
                         new StaggeredTile.count(2, index.isEven ? 2.5 : 2),
@@ -66,23 +73,7 @@ class Scholars extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(AppColor.kWhite),
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.users), label: 'User'),
-          BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.user), label: 'User'),
-          BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.book), label: 'Book'),
-          BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.star), label: 'Star')
-        ],
-        currentIndex: 0,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
-      ),
+      bottomNavigationBar: BottomNavigation(currentIndex:1, routeName: '/scholars')
     );
   }
 }
